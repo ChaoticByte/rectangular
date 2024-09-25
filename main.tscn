@@ -1,19 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://c13h0uf5fgx60"]
+[gd_scene load_steps=7 format=3 uid="uid://c13h0uf5fgx60"]
 
 [ext_resource type="PackedScene" uid="uid://ptqto8ctsp4u" path="res://levels/waking_up.tscn" id="1_3swad"]
 [ext_resource type="Shader" path="res://core/shaders/screen_effects.gdshader" id="2_ha2mu"]
+[ext_resource type="Shader" path="res://core/shaders/screen_effects_2.gdshader" id="3_lm730"]
+[ext_resource type="Texture2D" uid="uid://bwlgypt4xjocj" path="res://core/shaders/vignette_mask.tres" id="4_wc582"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_myg35"]
 shader = ExtResource("2_ha2mu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gsqgo"]
+shader = ExtResource("3_lm730")
+shader_parameter/vignette_mask = ExtResource("4_wc582")
 
 [node name="Main" type="Node2D"]
 
 [node name="WakingUp" parent="." instance=ExtResource("1_3swad")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ScreenShader" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" parent="ScreenShader"]
+editor_description = "Outline & glow"
+
+[node name="ColorRect" type="ColorRect" parent="ScreenShader/CanvasLayer"]
 material = SubResource("ShaderMaterial_myg35")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="ScreenShader"]
+editor_description = "Distortion effects"
+
+[node name="ColorRect" type="ColorRect" parent="ScreenShader/CanvasLayer2"]
+material = SubResource("ShaderMaterial_gsqgo")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
