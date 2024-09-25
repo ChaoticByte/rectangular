@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbynoofsjcl45"]
+
+[ext_resource type="Script" path="res://core/dynamic_polygon.gd" id="1_2pai0"]
+
+[node name="DynamicPolygon" type="CollisionPolygon2D"]
+script = ExtResource("1_2pai0")
+update = null
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)

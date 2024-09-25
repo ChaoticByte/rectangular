@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ebb4pfxklatj"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_fob34"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cq61"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+floor_block_on_wall = false
+script = ExtResource("1_fob34")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7cq61")
+
+[node name="RayCastUp1" type="RayCast2D" parent="."]
+position = Vector2(-4, 0)
+target_position = Vector2(0, -8.1)
+
+[node name="RayCastUp2" type="RayCast2D" parent="."]
+position = Vector2(4, 0)
+target_position = Vector2(0, -8.1)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-7, -7, -7, 7, 7, 7, 7, -7)
