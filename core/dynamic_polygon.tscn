@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbynoofsjcl45"]
 
-[ext_resource type="Script" path="res://core/dynamic_polygon.gd" id="1_2pai0"]
+[ext_resource type="Script" path="res://core/dynamic_polygon.gd" id="1_ga37f"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fkh4m"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ucwen"]
 
 [node name="DynamicPolygon" type="CollisionPolygon2D"]
-script = ExtResource("1_2pai0")
+script = ExtResource("1_ga37f")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 editor_description = "For particle collisions"
-occluder = SubResource("OccluderPolygon2D_fkh4m")
+occluder = SubResource("OccluderPolygon2D_ucwen")

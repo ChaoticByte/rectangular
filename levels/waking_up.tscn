@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ptqto8ctsp4u"]
 
 [ext_resource type="PackedScene" uid="uid://ebb4pfxklatj" path="res://player/player.tscn" id="1_h1tob"]
-[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/DynamicPolygon.tscn" id="2_83sm2"]
+[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/dynamic_polygon.tscn" id="2_83sm2"]
 
 [node name="WakingUp" type="Node2D"]
 
