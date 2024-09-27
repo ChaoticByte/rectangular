@@ -18,8 +18,8 @@ bool is_edge(int radius, vec2 screen_uv, vec2 screen_pixel_size) {
 	bool ed_found_bg = false;
 	bool ed_found_color = false;
 	// check neighbor pixels
-	for (int x = -radius; x < radius+1; x++) {
-		for (int y = -radius; y < radius+1; y++) {
+	for (int x = -radius; x <= radius; x++) {
+		for (int y = -radius; y <= radius; y++) {
 			vec4 p = texture(screen_texture, screen_uv + (vec2(float(x), float(y)) * screen_pixel_size));
 			if (p.rgb == BLACK) {
 				ed_found_bg = true;
