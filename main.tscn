@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c13h0uf5fgx60"]
+[gd_scene load_steps=8 format=3 uid="uid://c13h0uf5fgx60"]
 
-[ext_resource type="PackedScene" uid="uid://ptqto8ctsp4u" path="res://levels/waking_up.tscn" id="1_3swad"]
+[ext_resource type="Script" path="res://main.gd" id="1_m407c"]
 [ext_resource type="Shader" path="res://core/shaders/screen_effects.gdshader" id="2_ha2mu"]
 [ext_resource type="Shader" path="res://core/shaders/screen_effects_2.gdshader" id="3_lm730"]
 [ext_resource type="Texture2D" uid="uid://bwlgypt4xjocj" path="res://core/shaders/vignette_mask.tres" id="4_wc582"]
+[ext_resource type="PackedScene" uid="uid://ebb4pfxklatj" path="res://player/player.tscn" id="5_0agpg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_myg35"]
 shader = ExtResource("2_ha2mu")
@@ -13,8 +14,9 @@ shader = ExtResource("3_lm730")
 shader_parameter/vignette_mask = ExtResource("4_wc582")
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_m407c")
 
-[node name="WakingUp" parent="." instance=ExtResource("1_3swad")]
+[node name="LevelRoot" type="Node2D" parent="."]
 
 [node name="ScreenShader" type="Node2D" parent="."]
 
@@ -41,3 +43,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Player" parent="." instance=ExtResource("5_0agpg")]

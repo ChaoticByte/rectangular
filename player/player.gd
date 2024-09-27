@@ -34,3 +34,6 @@ func _physics_process(delta: float) -> void:
 			velocity.y = jump_velocity
 			jumps += 1
 	move_and_slide()
+
+func reset_physics():
+	velocity = Vector2.ZERO
