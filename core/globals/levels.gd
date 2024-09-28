@@ -7,11 +7,11 @@ class Entrypoint extends Object:
 	func _init(
 		scene_name_: String,
 		player_position_: Vector2,
-		reset_physics: bool
+		reset_physics_: bool
 	) -> void:
 		self.scene_name = scene_name_
 		self.player_position = player_position_
-		self.reset_physics = reset_physics
+		self.reset_physics = reset_physics_
 
 const SCENES = {
 	"intro": "uid://c6w7lrydi43ts"
@@ -52,6 +52,8 @@ func load_entrypoint(ep_name: String) -> bool: # returns true on success
 	var e: Entrypoint = ENTRYPOINTS[ep_name]
 	if load_scene(e.scene_name):
 		player.position = e.player_position
+		if e.reset_physics:
+			player.reset_physics()
 		return true
 	else:
 		return false
