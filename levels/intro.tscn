@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6w7lrydi43ts"]
 
-[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/dynamic_polygon.tscn" id="1_cup10"]
+[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon.tscn" id="1_cup10"]
 [ext_resource type="Script" path="res://levels/intro.gd" id="1_pgj82"]
 
 [node name="Intro" type="Node2D"]
@@ -8,19 +8,19 @@ script = ExtResource("1_pgj82")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="DynamicPolygon" parent="StaticBody2D" instance=ExtResource("1_cup10")]
+[node name="Polygon" parent="StaticBody2D" instance=ExtResource("1_cup10")]
 polygon = PackedVector2Array(64, 200, 64, 432, -176, 432, -176, 512, 960, 512, 960, 384, 648, 384, 648, 344, 704, 344, 704, 288, 616, 288, 616, 232, 408, 232, 408, 304, 544, 304, 544, 384, 544, 432, 408, 432, 408, 392, 488, 392, 488, 352, 360, 352, 360, 440, 256, 440, 256, 320, 192, 320, 192, 440, 128, 440, 128, 200)
 
-[node name="DynamicPolygon2" parent="StaticBody2D" instance=ExtResource("1_cup10")]
+[node name="Polygon2" parent="StaticBody2D" instance=ExtResource("1_cup10")]
 polygon = PackedVector2Array(448, 64, 448, 88, 512, 88, 512, 128, 384, 128, 384, 152, 640, 152, 640, 128, 688, 128, 688, 64)
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="DynamicPolygon" parent="Area2D" instance=ExtResource("1_cup10")]
+[node name="Polygon" parent="Area2D" instance=ExtResource("1_cup10")]
 polygon = PackedVector2Array(128, 384, 192, 384, 192, 440, 128, 440)
 color = Color(1, 0.1, 0, 1)
 
-[node name="DynamicPolygon2" parent="Area2D" instance=ExtResource("1_cup10")]
+[node name="Polygon2" parent="Area2D" instance=ExtResource("1_cup10")]
 polygon = PackedVector2Array(256, 384, 360, 384, 360, 440, 256, 440)
 color = Color(1, 0.1, 0, 1)
 
