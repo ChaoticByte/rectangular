@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqmpoix37kutp"]
+
+[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon.tscn" id="1_8p275"]
+[ext_resource type="Script" path="res://menu/menu.gd" id="1_g2w4y"]
+[ext_resource type="PackedScene" uid="uid://c40fli7qcma78" path="res://menu/slot/slot.tscn" id="3_rc4dm"]
+
+[node name="Menu" type="Node2D"]
+position = Vector2(0, -1)
+script = ExtResource("1_g2w4y")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -192.0
+offset_top = -15.0
+offset_right = 192.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 52
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Polygon" parent="StaticBody2D" instance=ExtResource("1_8p275")]
+polygon = PackedVector2Array(-256, 209, 320, 209, 320, 193, -272, 193, -272, 601, -304, 601, -304, 617, -256, 617)
+
+[node name="SaveGameSlots" type="Node2D" parent="."]
+position = Vector2(-448, 177)
+
+[node name="Saves" type="Label" parent="SaveGameSlots"]
+offset_left = -64.0
+offset_top = -176.0
+offset_right = 64.0
+offset_bottom = -112.0
+theme_override_font_sizes/font_size = 42
+text = "Saves"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Slot0" parent="SaveGameSlots" instance=ExtResource("3_rc4dm")]
+slot_label = "0"
+
+[node name="Slot1" parent="SaveGameSlots" instance=ExtResource("3_rc4dm")]
+position = Vector2(0, 128)
+slot_idx = 1
+slot_label = "1"
+
+[node name="Slot2" parent="SaveGameSlots" instance=ExtResource("3_rc4dm")]
+position = Vector2(0, 256)
+slot_idx = 2
+slot_label = "2"
+
+[node name="Slot3" parent="SaveGameSlots" instance=ExtResource("3_rc4dm")]
+position = Vector2(0, 384)
+slot_idx = 3
+slot_label = "3"

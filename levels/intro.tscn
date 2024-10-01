@@ -24,4 +24,11 @@ color = Color(1, 0.1, 0, 1)
 polygon = PackedVector2Array(256, 384, 360, 384, 360, 440, 256, 440)
 color = Color(1, 0.1, 0, 1)
 
+[node name="next_level" type="Area2D" parent="."]
+
+[node name="Polygon" parent="next_level" instance=ExtResource("1_cup10")]
+polygon = PackedVector2Array(416, 400, 416, 424, 440, 424, 440, 400)
+color = Color(0.484431, 0.687354, 1, 1)
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="next_level" to="." method="_on_next_level_body_entered"]

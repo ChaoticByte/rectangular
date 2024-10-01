@@ -1,9 +1,16 @@
 extends CharacterBody2D
 
+# die
+
+func die():
+	Levels.load_entrypoint(Gamestate.last_entrypoint)
+
+# movement and stuff
 
 @export var movement_speed = 300.0
 @export var jump_velocity = -350.0
 @export var max_jumps: int = 2
+@export var rigidbody_impulse_mult: float = 0.04
 
 @onready var ceiling_raycast1 = $RayCastUp1
 @onready var ceiling_raycast2 = $RayCastUp2
@@ -34,6 +41,12 @@ func _physics_process(delta: float) -> void:
 			velocity.y = jump_velocity
 			jumps += 1
 	move_and_slide()
-
-func reset_physics():
-	velocity = Vector2.ZERO
+	# affect rigid bodies
+	# adapted solution from
+	# https://kidscancode.org/godot_recipes/4.x/physics/character_vs_rigid/index.html
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider is RigidBody2D:
+			var impulse = -collision.get_normal() * (velocity.length() / collider.mass) * rigidbody_impulse_mult
+			collider.apply_central_impulse(impulse)

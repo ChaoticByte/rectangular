@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Levels="*res://core/globals/levels.gd"
+NodeRegistry="*res://core/globals/node_registry.gd"
+Gamestate="*res://core/globals/gamestate.gd"
 
 [debug]
 
@@ -54,6 +56,8 @@ player_right={
 
 [physics]
 
+common/physics_ticks_per_second=120
+common/max_physics_steps_per_frame=16
 common/physics_jitter_fix=0.0
 2d/physics_engine="Rapier2D"
 common/physics_interpolation=true
@@ -61,6 +65,7 @@ common/physics_interpolation=true
 [rendering]
 
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+anti_aliasing/quality/screen_space_aa=1
 anti_aliasing/size/mode=3
 anti_aliasing/stretch/aspect="keep"
 anti_aliasing/stretch/mode="viewport"

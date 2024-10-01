@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://c40fli7qcma78"]
+
+[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon.tscn" id="1_2cb7u"]
+[ext_resource type="Script" path="res://menu/slot/slot.gd" id="1_3dgi0"]
+
+[node name="Slot" type="Node2D"]
+script = ExtResource("1_3dgi0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="platform" parent="StaticBody2D" instance=ExtResource("1_2cb7u")]
+polygon = PackedVector2Array(44, 16, -44, 16, -44, 48, -64, 48, -64, 16, -80, 16, -80, 56, 80, 56, 80, 16, 64, 16, 64, 48, 44, 48)
+
+[node name="Area2D_Load" type="Area2D" parent="."]
+
+[node name="Polygon" parent="Area2D_Load" instance=ExtResource("1_2cb7u")]
+polygon = PackedVector2Array(44, 48, 64, 48, 64, 24, 44, 24)
+color = Color(0, 1, 0, 1)
+
+[node name="Area2D_Delete" type="Area2D" parent="."]
+
+[node name="Polygon" parent="Area2D_Delete" instance=ExtResource("1_2cb7u")]
+polygon = PackedVector2Array(-64, 48, -44, 48, -44, 24, -64, 24)
+color = Color(1, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 16.0
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Area2D_Load" to="." method="_on_area_2d_load_body_entered"]
+[connection signal="body_entered" from="Area2D_Delete" to="." method="_on_area_2d_delete_body_entered"]

@@ -1,6 +1,6 @@
 extends Node2D
 
 func _ready() -> void:
-	Levels.level_root = $LevelRoot
-	Levels.player = $Player
-	Levels.load_entrypoint("intro_start")
+	NodeRegistry.level_root_container = $LevelRoot
+	NodeRegistry.player = $Player
+	Levels.load_menu()
