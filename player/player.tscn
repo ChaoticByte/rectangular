@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ebb4pfxklatj"]
+[gd_scene load_steps=4 format=3 uid="uid://ebb4pfxklatj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fob34"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p33ik"]
+polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7cq61"]
 size = Vector2(16, 16)
@@ -14,6 +17,9 @@ process_callback = 0
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_p33ik")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7cq61")

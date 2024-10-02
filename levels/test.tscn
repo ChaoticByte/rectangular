@@ -1,10 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqf665b540tfg"]
+[gd_scene load_steps=3 format=3 uid="uid://dqf665b540tfg"]
 
 [ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon.tscn" id="1_xm2ft"]
+[ext_resource type="PackedScene" uid="uid://b8cjp6hiqycxe" path="res://core/rain.tscn" id="2_31352"]
 
 [node name="Test" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Polygon" parent="StaticBody2D" instance=ExtResource("1_xm2ft")]
-polygon = PackedVector2Array(-104, 232, -104, 320, 552, 320, 552, 232)
+polygon = PackedVector2Array(-104, 232, -104, 320, 1024, 320, 1024, 232)
+
+[node name="Rain" parent="." instance=ExtResource("2_31352")]
+position = Vector2(1128, -400)
+amount_ratio = 1.0
