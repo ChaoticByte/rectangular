@@ -71,7 +71,6 @@ func load_entrypoint(ep_name: String) -> bool: # returns true on success
 	if not _pre_load_checks():
 		return false
 	var e: Entrypoint = ENTRYPOINTS[ep_name]
-	var loaded = false
 	if load_scene(e.scene_name):
 		NodeRegistry.player.position = e.player_position
 		if not e.keep_velocity or NodeRegistry.player.velocity == Vector2.ZERO:
