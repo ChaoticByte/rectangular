@@ -75,6 +75,9 @@ func reset_slot(idx: int):
 		if FileAccess.file_exists(slot_path):
 			DirAccess.remove_absolute(slot_path)
 
+func is_slot_used(idx: int):
+	return FileAccess.file_exists("user://slot%s.save" % idx)
+
 #
 
 func quit(code: int):
