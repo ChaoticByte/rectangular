@@ -41,9 +41,6 @@ func _pre_load_checks() -> bool:
 	if NodeRegistry.level_root_container == null:
 		push_error("Can't load level, level_root_container is not registered yet.")
 		return false
-	if NodeRegistry.level_text_root_container == null:
-		push_error("Can't load level, level_text_root_container is not registered yet.")
-		return false
 	if NodeRegistry.player == null:
 		push_error("Can't load entrypoint, player is not registered yet.")
 		return false
@@ -61,18 +58,12 @@ func load_scene(scn_name: String, force_reload: bool = false) -> bool:
 	unload_scene()
 	var scn: Node2D = load(SCENES[scn_name]).instantiate()
 	NodeRegistry.level_root_container.add_child(scn)
-	for t in get_tree().get_nodes_in_group("text_viewport"):
-		t.reparent(NodeRegistry.level_text_root_container)
 	return true
 
 func unload_scene():
-	for container in [
-		NodeRegistry.level_root_container,
-		NodeRegistry.level_text_root_container
-	]:
-		if container != null:
-			for c in container.get_children():
-				c.queue_free()
+	if NodeRegistry.level_root_container != null:
+		for c in NodeRegistry.level_root_container.get_children():
+			c.queue_free()
 
 func load_entrypoint(ep_name: String) -> bool: # returns true on success
 	if not ep_name in ENTRYPOINTS:

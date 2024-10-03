@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://main.gd" id="1_m407c"]
 [ext_resource type="PackedScene" uid="uid://dxp3dru2lrv6h" path="res://core/shaders/outline/outline_canvas_layer.tscn" id="2_ta1pa"]
 [ext_resource type="PackedScene" uid="uid://jmy11lqcs4c" path="res://core/shaders/distortion/distortion_canvas_layer.tscn" id="3_emkei"]
+[ext_resource type="Script" path="res://core/text_viewport.gd" id="4_hxymt"]
 [ext_resource type="PackedScene" uid="uid://ebb4pfxklatj" path="res://player/player.tscn" id="5_0agpg"]
-[ext_resource type="Script" path="res://core/shadowing_camera_2d.gd" id="5_rlmue"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -54,13 +54,13 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(800, 450)
 render_target_update_mode = 4
+script = ExtResource("4_hxymt")
 
 [node name="LevelTextRootContainer" type="Node2D" parent="TextViewportContainer/TextViewport"]
 unique_name_in_owner = true
 
-[node name="ShadowingCamera2D" type="Camera2D" parent="TextViewportContainer/TextViewport"]
+[node name="Camera2D" type="Camera2D" parent="TextViewportContainer/TextViewport"]
 editor_description = "Shadows the camera in MainViewportContainer"
 anchor_mode = 0
-script = ExtResource("5_rlmue")
 
 [node name="DistortionShader" parent="." instance=ExtResource("3_emkei")]
