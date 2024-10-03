@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://jmy11lqcs4c"]
 
 [ext_resource type="Shader" path="res://core/shaders/distortion/distortion_shader.gdshader" id="1_4skfc"]
-[ext_resource type="Texture2D" uid="uid://bwlgypt4xjocj" path="res://core/shaders/vignette_mask.tres" id="2_add6c"]
+[ext_resource type="Texture2D" uid="uid://bwlgypt4xjocj" path="res://core/shaders/distortion/vignette_mask.tres" id="2_add6c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gsqgo"]
 shader = ExtResource("1_4skfc")
