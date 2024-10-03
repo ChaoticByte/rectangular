@@ -1,6 +1,7 @@
-extends Node2D
+extends Node
 
 func _ready() -> void:
-	NodeRegistry.level_root_container = $LevelRoot
-	NodeRegistry.player = $Player
+	NodeRegistry.player = %Player
+	NodeRegistry.level_root_container = %LevelRootContainer
+	NodeRegistry.level_text_root_container = %LevelTextRootContainer
 	Levels.load_menu()

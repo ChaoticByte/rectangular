@@ -23,7 +23,11 @@ void fragment() {
 		rgb_distortion_v_min,
 		rgb_distortion_v_max
 	);
-	COLOR.r = textureLod(screen_texture, SCREEN_UV - (v_ * 0.01), v).r;
-	COLOR.g = textureLod(screen_texture, SCREEN_UV + (v_ * 0.01), v).g;
-	COLOR.b = textureLod(screen_texture, SCREEN_UV, v).b;
+	vec2 screen_uv_r = SCREEN_UV - (v_ * 0.01);
+	vec2 screen_uv_g = SCREEN_UV + (v_ * 0.01);
+	vec2 screen_uv_b = SCREEN_UV;
+	COLOR.r = textureLod(screen_texture, screen_uv_r, v).r;
+	COLOR.g = textureLod(screen_texture, screen_uv_g, v).g;
+	COLOR.b = textureLod(screen_texture, screen_uv_b, v).b;
+	COLOR.a = 1.0;
 }

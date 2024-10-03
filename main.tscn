@@ -1,17 +1,66 @@
-[gd_scene load_steps=5 format=3 uid="uid://c13h0uf5fgx60"]
+[gd_scene load_steps=6 format=3 uid="uid://c13h0uf5fgx60"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_m407c"]
 [ext_resource type="PackedScene" uid="uid://dxp3dru2lrv6h" path="res://core/shaders/outline/outline_canvas_layer.tscn" id="2_ta1pa"]
 [ext_resource type="PackedScene" uid="uid://jmy11lqcs4c" path="res://core/shaders/distortion/distortion_canvas_layer.tscn" id="3_emkei"]
 [ext_resource type="PackedScene" uid="uid://ebb4pfxklatj" path="res://player/player.tscn" id="5_0agpg"]
+[ext_resource type="Script" path="res://core/shadowing_camera_2d.gd" id="5_rlmue"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_m407c")
 
-[node name="LevelRoot" type="Node2D" parent="."]
+[node name="MainViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
 
-[node name="OutlineShader" parent="." instance=ExtResource("2_ta1pa")]
+[node name="MainViewport" type="SubViewport" parent="MainViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(800, 450)
+render_target_update_mode = 4
+
+[node name="LevelRootContainer" type="Node2D" parent="MainViewportContainer/MainViewport"]
+unique_name_in_owner = true
+
+[node name="Player" parent="MainViewportContainer/MainViewport" instance=ExtResource("5_0agpg")]
+unique_name_in_owner = true
+
+[node name="OutlineShader" parent="MainViewportContainer/MainViewport" instance=ExtResource("2_ta1pa")]
+
+[node name="TextViewportContainer" type="SubViewportContainer" parent="."]
+editor_description = "All nodes in the text_viewport group will be rendered in this viewport instead."
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="TextViewport" type="SubViewport" parent="TextViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(800, 450)
+render_target_update_mode = 4
+
+[node name="LevelTextRootContainer" type="Node2D" parent="TextViewportContainer/TextViewport"]
+unique_name_in_owner = true
+
+[node name="ShadowingCamera2D" type="Camera2D" parent="TextViewportContainer/TextViewport"]
+editor_description = "Shadows the camera in MainViewportContainer"
+anchor_mode = 0
+script = ExtResource("5_rlmue")
 
 [node name="DistortionShader" parent="." instance=ExtResource("3_emkei")]
-
-[node name="Player" parent="." instance=ExtResource("5_0agpg")]

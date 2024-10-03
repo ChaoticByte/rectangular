@@ -23,7 +23,7 @@ color = Color(0, 1, 0, 1)
 polygon = PackedVector2Array(-64, 48, -44, 48, -44, 24, -64, 24)
 color = Color(1, 0, 0, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." groups=["text_viewport"]]
 offset_left = -16.0
 offset_top = -32.0
 offset_right = 16.0

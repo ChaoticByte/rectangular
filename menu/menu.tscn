@@ -8,16 +8,6 @@
 position = Vector2(0, -1)
 script = ExtResource("1_g2w4y")
 
-[node name="Label" type="Label" parent="."]
-offset_left = -192.0
-offset_top = -15.0
-offset_right = 192.0
-offset_bottom = 65.0
-theme_override_font_sizes/font_size = 52
-text = "Main Menu"
-horizontal_alignment = 1
-vertical_alignment = 2
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Polygon" parent="StaticBody2D" instance=ExtResource("1_8p275")]
@@ -26,13 +16,13 @@ polygon = PackedVector2Array(-256, 209, 320, 209, 320, 193, -272, 193, -272, 601
 [node name="SaveGameSlots" type="Node2D" parent="."]
 position = Vector2(-448, 177)
 
-[node name="Saves" type="Label" parent="SaveGameSlots"]
+[node name="Saves" type="Label" parent="SaveGameSlots" groups=["text_viewport"]]
 offset_left = -64.0
 offset_top = -176.0
 offset_right = 64.0
 offset_bottom = -112.0
 theme_override_font_sizes/font_size = 42
-text = "Saves"
+text = "saves"
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -53,3 +43,13 @@ slot_label = "2"
 position = Vector2(0, 384)
 slot_idx = 3
 slot_label = "3"
+
+[node name="Label" type="Label" parent="." groups=["text_viewport"]]
+offset_left = -192.0
+offset_top = -15.0
+offset_right = 192.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 52
+text = "rectangular"
+horizontal_alignment = 1
+vertical_alignment = 2
