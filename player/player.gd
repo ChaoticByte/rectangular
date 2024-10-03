@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var camera = $Camera2D
+
 # die
 
 func die():

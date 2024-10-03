@@ -29,7 +29,7 @@ var MENU_SCENE: PackedScene = preload("res://menu/menu.tscn")
 
 var ENTRYPOINTS = {
 	"intro_start": Entrypoint.new("intro", Vector2(0, 0)),
-	"test": Entrypoint.new("test", Vector2(0, 200), false, Vector2(0, -500)),
+	"test": Entrypoint.new("test", Vector2(1680, 200), false, Vector2(0, -500)),
 }
 
 # load that stuff
@@ -73,6 +73,7 @@ func load_entrypoint(ep_name: String) -> bool: # returns true on success
 	var e: Entrypoint = ENTRYPOINTS[ep_name]
 	if load_scene(e.scene_name):
 		NodeRegistry.player.position = e.player_position
+		NodeRegistry.player.camera.call_deferred("reset_smoothing")
 		if not e.keep_velocity or NodeRegistry.player.velocity == Vector2.ZERO:
 			NodeRegistry.player.velocity = e.initial_velocity
 		Gamestate.last_entrypoint = ep_name

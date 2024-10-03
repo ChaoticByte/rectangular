@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b8cjp6hiqycxe" path="res://core/rain.tscn" id="2_31352"]
 
 [node name="Test" type="Node2D"]
+position = Vector2(1680, 80)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
