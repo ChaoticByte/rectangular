@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxp3dru2lrv6h"]
+
+[ext_resource type="Shader" path="res://core/shaders/outline/outline_shader.gdshader" id="1_27aro"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_myg35"]
+shader = ExtResource("1_27aro")
+
+[node name="OutlineShader" type="CanvasLayer"]
+editor_description = "Outline & glow"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_myg35")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true

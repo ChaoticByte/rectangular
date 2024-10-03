@@ -1,47 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://c13h0uf5fgx60"]
+[gd_scene load_steps=5 format=3 uid="uid://c13h0uf5fgx60"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_m407c"]
-[ext_resource type="Shader" path="res://core/shaders/screen_effects.gdshader" id="2_ha2mu"]
-[ext_resource type="Shader" path="res://core/shaders/screen_effects_2.gdshader" id="3_lm730"]
-[ext_resource type="Texture2D" uid="uid://bwlgypt4xjocj" path="res://core/shaders/vignette_mask.tres" id="4_wc582"]
+[ext_resource type="PackedScene" uid="uid://dxp3dru2lrv6h" path="res://core/shaders/outline/outline_canvas_layer.tscn" id="2_ta1pa"]
+[ext_resource type="PackedScene" uid="uid://jmy11lqcs4c" path="res://core/shaders/distortion/distortion_canvas_layer.tscn" id="3_emkei"]
 [ext_resource type="PackedScene" uid="uid://ebb4pfxklatj" path="res://player/player.tscn" id="5_0agpg"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_myg35"]
-shader = ExtResource("2_ha2mu")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gsqgo"]
-shader = ExtResource("3_lm730")
-shader_parameter/vignette_mask = ExtResource("4_wc582")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_m407c")
 
 [node name="LevelRoot" type="Node2D" parent="."]
 
-[node name="ScreenShader" type="Node2D" parent="."]
+[node name="OutlineShader" parent="." instance=ExtResource("2_ta1pa")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="ScreenShader"]
-editor_description = "Outline & glow"
-
-[node name="ColorRect" type="ColorRect" parent="ScreenShader/CanvasLayer"]
-material = SubResource("ShaderMaterial_myg35")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="ScreenShader"]
-editor_description = "Distortion effects"
-
-[node name="ColorRect" type="ColorRect" parent="ScreenShader/CanvasLayer2"]
-material = SubResource("ShaderMaterial_gsqgo")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="DistortionShader" parent="." instance=ExtResource("3_emkei")]
 
 [node name="Player" parent="." instance=ExtResource("5_0agpg")]
