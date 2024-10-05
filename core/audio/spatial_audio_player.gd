@@ -55,7 +55,7 @@ func create_raycasts():
 
 func determine_reverb_params() -> Array[float]:
 	# returns [room_size, wetness]
-	var n_coll = 0
+	var n_coll: int = 0
 	var collision_points: Array[Vector2] = []
 	for r in raycasts:
 		if r.is_colliding():
@@ -117,5 +117,4 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	var reverb_params = determine_reverb_params()
-	print(reverb_params)
 	update_reverb(reverb_params[0], reverb_params[1])
