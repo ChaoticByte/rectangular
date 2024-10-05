@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0oj3olekssau"]
+
+[ext_resource type="Script" path="res://core/audio/spatial_audio_player.gd" id="1_j22e2"]
+
+[node name="SpatialAudioPlayer" type="AudioStreamPlayer2D"]
+playback_type = 1
+script = ExtResource("1_j22e2")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqmpoix37kutp"]
 
-[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon.tscn" id="1_8p275"]
+[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon/polygon.tscn" id="1_8p275"]
 [ext_resource type="Script" path="res://menu/menu.gd" id="1_g2w4y"]
 [ext_resource type="PackedScene" uid="uid://c40fli7qcma78" path="res://menu/slot/slot.tscn" id="3_rc4dm"]
 

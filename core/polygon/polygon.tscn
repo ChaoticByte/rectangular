@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbynoofsjcl45"]
 
-[ext_resource type="Script" path="res://core/polygon.gd" id="1_ga37f"]
+[ext_resource type="Script" path="res://core/polygon/polygon.gd" id="1_ga37f"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dhpxk"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lp5j7"]
 
 [node name="Polygon" type="CollisionPolygon2D"]
 script = ExtResource("1_ga37f")
@@ -11,4 +11,4 @@ script = ExtResource("1_ga37f")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 editor_description = "For particle collisions"
-occluder = SubResource("OccluderPolygon2D_dhpxk")
+occluder = SubResource("OccluderPolygon2D_lp5j7")

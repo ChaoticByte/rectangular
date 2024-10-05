@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqf665b540tfg"]
 
-[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon.tscn" id="1_xm2ft"]
+[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon/polygon.tscn" id="1_xm2ft"]
 [ext_resource type="PackedScene" uid="uid://b8cjp6hiqycxe" path="res://core/rain.tscn" id="2_31352"]
 
 [node name="Test" type="Node2D"]
@@ -11,6 +11,9 @@ position = Vector2(1680, 80)
 [node name="Polygon" parent="StaticBody2D" instance=ExtResource("1_xm2ft")]
 polygon = PackedVector2Array(-104, 232, -104, 320, 1024, 320, 1024, 232)
 
+[node name="Polygon2" parent="StaticBody2D" instance=ExtResource("1_xm2ft")]
+polygon = PackedVector2Array(-208, 184, -144, 184, -144, -400, 1008, -400, 1008, 176, 1072, 176, 1072, -464, -208, -464)
+
 [node name="Rain" parent="." instance=ExtResource("2_31352")]
-position = Vector2(1128, -400)
+position = Vector2(544, -396.25)
 amount_ratio = 1.0

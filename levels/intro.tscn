@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6w7lrydi43ts"]
 
-[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon.tscn" id="1_cup10"]
+[ext_resource type="PackedScene" uid="uid://cbynoofsjcl45" path="res://core/polygon/polygon.tscn" id="1_cup10"]
 [ext_resource type="Script" path="res://levels/intro.gd" id="1_pgj82"]
 
 [node name="Intro" type="Node2D"]
