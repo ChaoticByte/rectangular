@@ -3,6 +3,8 @@ extends AudioStreamPlayer2D
 
 # EXPORTED VARS
 
+@export_category("dampening effect")
+@export var n_pointcasts_to_player: int = 25
 @export var lowpass_cutoff_mult: float = 1000
 @export var lowpass_cutoff_min: float = 100
 @export var dampening_distance_divisor_mult: float = 500
@@ -86,7 +88,6 @@ func determine_reverb_params() -> Array[float]:
 
 # DETERMINE DAMPENING (LOWPASS) EFFECT PARAMETERS
 
-const N_POINTCASTS_TO_PLAYER: int = 25
 const POINTCAST_TO_PLAYER_COLL_MASK: int = 0b00000000_00000000_00000000_00000001
 const LOWPASS_CUTOFF_MAX: float = 20000
 
@@ -100,16 +101,16 @@ func determine_distance_amount_blocked() -> float:
 	var n_coll: int = 0
 	# cast points towards player
 	var space_state = get_world_2d().direct_space_state
-	for i in range(N_POINTCASTS_TO_PLAYER):
+	for i in range(n_pointcasts_to_player):
 		# linear interpolate between own position and player position
-		var point_pos = lerp(self.global_position, position_player, i/float(N_POINTCASTS_TO_PLAYER))
+		var point_pos = lerp(self.global_position, position_player, i/float(n_pointcasts_to_player))
 		var query_params = PhysicsPointQueryParameters2D.new()
 		query_params.collision_mask = POINTCAST_TO_PLAYER_COLL_MASK
 		query_params.position = point_pos
 		var result = space_state.intersect_point(query_params)
 		if len(result) > 0:
 			n_coll += 1
-	return (n_coll*distance_to_player) / (float(N_POINTCASTS_TO_PLAYER)*dampening_distance_divisor_mult)
+	return (n_coll*distance_to_player) / (float(n_pointcasts_to_player)*dampening_distance_divisor_mult)
 
 # AUDIO EFFECTS
 
