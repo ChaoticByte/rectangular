@@ -15,5 +15,5 @@ polygon = PackedVector2Array(-104, 232, -104, 320, 1024, 320, 1024, 232)
 polygon = PackedVector2Array(-208, 184, -144, 184, -144, -400, 1008, -400, 1008, 176, 1072, 176, 1072, -464, -208, -464)
 
 [node name="Rain" parent="." instance=ExtResource("2_31352")]
-position = Vector2(544, -396.25)
+position = Vector2(433.72, -396.25)
 amount_ratio = 1.0

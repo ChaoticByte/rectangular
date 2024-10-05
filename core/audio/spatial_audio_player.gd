@@ -1,10 +1,6 @@
 class_name SpatialAudioStreamPlayer2D
 extends AudioStreamPlayer2D
 
-# EXPORTED VARS
-
-@export var radius: float = 1000.0
-
 # DETERMINE REVERB AMOUNT
 
 const RAYCAST_VECS: Array[Vector2] = [
@@ -17,9 +13,9 @@ const RAYCAST_VECS: Array[Vector2] = [
 	Vector2(0, 1),	 # 6 - bottom
 	Vector2(-1, 1)	 # 7 - bottom left
 ]
-const REVERB_MULT_PARALLEL = 2.0
-const REVERB_MULT_OPP_45DEG = 1.0
-const REVERB_MULT_90DEG = 0.5
+const REVERB_MULT_PARALLEL = 1.0
+const REVERB_MULT_OPP_45DEG = 0.5
+const REVERB_MULT_90DEG = 0.25
 const REVERB_PAIRS = [
 	# [<index in raycasts array>, <index in raycasts array>, <multiplier>]
 	# parallel walls
@@ -46,21 +42,14 @@ const REVERB_PAIRS = [
 	[4, 6, REVERB_MULT_90DEG],
 	[5, 7, REVERB_MULT_90DEG]
 ]
-
-var max_reverb_pairs_sum: float = ( # i'm shure I messed up this calculation
-	radius * (						# but it works
-		  (4.0 * REVERB_MULT_PARALLEL)
-		+ (8.0 * REVERB_MULT_OPP_45DEG)
-		+ (8.0 * REVERB_MULT_90DEG)
-	)
-)
+const REVERB_PAIRS_SUM_DIVISOR = 2500.0 # i dunno
 
 var raycasts: Array[RayCast2D] = []
 
 func create_raycasts():
 	for v in RAYCAST_VECS:
 		var r = RayCast2D.new()
-		r.target_position = v.normalized() * radius
+		r.target_position = v.normalized() * max_distance
 		raycasts.append(r)
 		self.add_child(r)
 
@@ -83,10 +72,9 @@ func determine_reverb_params() -> Array[float]:
 	for p in REVERB_PAIRS:
 		if collision_points[p[0]] != Vector2(INF, INF) and collision_points[p[1]] != Vector2(INF, INF):
 			reverb_pairs_sum += (
-				collision_points[p[0]].distance_to(collision_points[p[1]])
-				* p[2]
+				collision_points[p[0]].distance_to(collision_points[p[1]]) * p[2]
 			)
-	var room_size =  reverb_pairs_sum / max_reverb_pairs_sum
+	var room_size = reverb_pairs_sum / REVERB_PAIRS_SUM_DIVISOR
 	var wetness = n_coll / 8.0
 	return [room_size, wetness]
 
@@ -129,4 +117,5 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	var reverb_params = determine_reverb_params()
+	print(reverb_params)
 	update_reverb(reverb_params[0], reverb_params[1])

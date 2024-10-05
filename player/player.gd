@@ -52,6 +52,3 @@ func _physics_process(delta: float) -> void:
 		if collider is RigidBody2D:
 			var impulse = -collision.get_normal() * (velocity.length() / collider.mass) * rigidbody_impulse_mult
 			collider.apply_central_impulse(impulse)
-
-func _ready() -> void:
-	$AudioListener2D.make_current()
