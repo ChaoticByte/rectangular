@@ -5,41 +5,41 @@ extends CharacterBody2D
 # die
 
 func die():
-	Levels.load_entrypoint(Gamestate.last_entrypoint)
+	LevelsCore.load_entrypoint(Gamestate.last_entrypoint)
 
 # movement and stuff
 
 @export var movement_speed = 300.0
 @export var jump_velocity = -350.0
+@export var air_friction = 0.02
+@export var floor_friction = 0.1
 @export var max_jumps: int = 2
 @export var rigidbody_impulse_mult: float = 0.04
 
-@onready var ceiling_raycast1 = $RayCastUp1
-@onready var ceiling_raycast2 = $RayCastUp2
-
-var jumps = 0
+var locked: bool = false
+var jumps: int = 0
 
 func _physics_process(delta: float) -> void:
+	var gravity = get_gravity()
 	var dir = Input.get_axis("player_left", "player_right")
 	var on_floor = is_on_floor()
 	var on_wall = is_on_wall()
-	var on_ceiling = ceiling_raycast1.is_colliding() or ceiling_raycast2.is_colliding()
 	# left right movement
-	if dir:
-		velocity.x = dir * movement_speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, movement_speed)
+	if dir and not locked:
+		velocity.x = move_toward(velocity.x, dir * movement_speed, movement_speed*floor_friction)
+	elif on_floor:# or on_ceiling:
+		velocity.x = move_toward(velocity.x, 0, movement_speed*floor_friction)
+	elif not locked:
+		velocity.x = move_toward(velocity.x, 0, movement_speed*air_friction)
 	# gravity
-	if not (on_floor or on_ceiling):
-		velocity += get_gravity() * delta
+	if not on_floor:
+		velocity += gravity * delta
 	# reset number of jumps
-	if on_ceiling or on_floor or on_wall:
+	if on_floor or on_wall:
 		jumps = 0
 	# jumping / dropping from ceiling
-	if Input.is_action_just_pressed("player_jump"):
-		if on_ceiling: # drop from ceiling
-			velocity += get_gravity() * delta
-		elif jumps < max_jumps: # (allows air jumps)
+	if Input.is_action_just_pressed("player_jump") and not locked:
+		if jumps < max_jumps: # (allows air jumps)
 			velocity.y = jump_velocity
 			jumps += 1
 	move_and_slide()

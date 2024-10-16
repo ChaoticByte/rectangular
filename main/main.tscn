@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dxp3dru2lrv6h" path="res://core/shaders/outline/outline_canvas_layer.tscn" id="2_ta1pa"]
 [ext_resource type="PackedScene" uid="uid://jmy11lqcs4c" path="res://core/shaders/distortion/distortion_canvas_layer.tscn" id="3_emkei"]
 [ext_resource type="Script" path="res://main/text_viewport.gd" id="4_hxymt"]
-[ext_resource type="PackedScene" uid="uid://ebb4pfxklatj" path="res://player/player.tscn" id="5_0agpg"]
+[ext_resource type="PackedScene" uid="uid://ebb4pfxklatj" path="res://core/player/player.tscn" id="5_0agpg"]
 
 [node name="Main" type="Control"]
 layout_mode = 3

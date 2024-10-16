@@ -1,12 +1,11 @@
 extends Node
 
-const mainmenu_player_pos: Vector2 = Vector2(0, 128 + 32)
-
 class Entrypoint extends Object:
 	var scene_name: String
 	var player_position: Vector2
 	var keep_velocity: bool
 	var initial_velocity: Vector2
+	var lock_player: bool
 	func _init(
 		scene_name_: String,
 		player_position_: Vector2,
@@ -14,24 +13,15 @@ class Entrypoint extends Object:
 		# if player velocity is zero, use initial_velocity
 		keep_velocity_: bool = true,
 		# initial player velocity
-		initial_velocity_: Vector2 = Vector2.ZERO
+		initial_velocity_: Vector2 = Vector2.ZERO,
+		# lock player movement
+		lock_player_: bool = false
 	) -> void:
 		self.scene_name = scene_name_
 		self.player_position = player_position_
 		self.keep_velocity = keep_velocity_
 		self.initial_velocity = initial_velocity_
-
-const SCENES = {
-	"menu": "uid://bqmpoix37kutp",
-	"intro": "uid://c6w7lrydi43ts",
-	"test": "uid://dqf665b540tfg",
-}
-var MENU_SCENE: PackedScene = preload("res://menu/menu.tscn")
-
-var ENTRYPOINTS = {
-	"intro_start": Entrypoint.new("intro", Vector2(0, 0)),
-	"test": Entrypoint.new("test", Vector2(1680, 200), false, Vector2(0, -500)),
-}
+		self.lock_player = lock_player_
 
 # load that stuff
 
@@ -52,11 +42,11 @@ func load_scene(scn_name: String, force_reload: bool = false) -> bool:
 		return true # nothing to do :)
 	if not _pre_load_checks():
 		return false
-	if not scn_name in SCENES:
+	if not scn_name in LevelsDef.SCENES:
 		push_error("Level " + scn_name + " doesn't exist.")
 		return false
 	unload_scene()
-	var scn: Node2D = load(SCENES[scn_name]).instantiate()
+	var scn: Node2D = load(LevelsDef.SCENES[scn_name]).instantiate()
 	NodeRegistry.level_root_container.add_child(scn)
 	return true
 
@@ -66,17 +56,19 @@ func unload_scene():
 			c.queue_free()
 
 func load_entrypoint(ep_name: String) -> bool: # returns true on success
-	if not ep_name in ENTRYPOINTS:
+	if not ep_name in LevelsDef.ENTRYPOINTS:
 		push_error("Entrypoint " + ep_name + " doesn't exist.")
 		return false
 	if not _pre_load_checks():
 		return false
-	var e: Entrypoint = ENTRYPOINTS[ep_name]
+	var e: Entrypoint = LevelsDef.ENTRYPOINTS[ep_name]
 	if load_scene(e.scene_name):
 		NodeRegistry.player.position = e.player_position
 		NodeRegistry.player.camera.call_deferred("reset_smoothing")
 		if not e.keep_velocity or NodeRegistry.player.velocity == Vector2.ZERO:
 			NodeRegistry.player.velocity = e.initial_velocity
+		if e.lock_player:
+			NodeRegistry.player.locked = true
 		Gamestate.last_entrypoint = ep_name
 		Gamestate.save_slot() # save game
 		return true
@@ -87,5 +79,5 @@ func load_menu():
 	if not _pre_load_checks():
 		return false
 	unload_scene()
-	NodeRegistry.player.position = mainmenu_player_pos
+	NodeRegistry.player.position = Vector2(0, 129)
 	return load_scene("menu", true)

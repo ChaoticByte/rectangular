@@ -1,6 +1,9 @@
 [gd_resource type="GradientTexture2D" load_steps=2 format=3 uid="uid://bwlgypt4xjocj"]
 
 [sub_resource type="Gradient" id="Gradient_h26vj"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.0432099, 1)
+colors = PackedColorArray(0.0768358, 0.0768358, 0.0768358, 1, 1, 1, 1, 1)
 
 [resource]
 gradient = SubResource("Gradient_h26vj")

@@ -8,9 +8,9 @@ const COLOR_USED = Color.WHITE
 
 func update_color():
 	if Gamestate.is_slot_used(slot_idx):
-		$StaticBody2D/platform.color = COLOR_USED
+		$Platform/P.color = COLOR_USED
 	else:
-		$StaticBody2D/platform.color = COLOR_NORMAL
+		$Platform/P.color = COLOR_NORMAL
 
 func _ready() -> void:
 	$Label.text = str(slot_label)
@@ -21,7 +21,7 @@ func _on_area_2d_load_body_entered(body: Node2D) -> void:
 	if body == NodeRegistry.player:
 		Gamestate.current_slot = slot_idx
 		Gamestate.load_slot()
-		Levels.load_entrypoint(Gamestate.last_entrypoint)
+		LevelsCore.load_entrypoint(Gamestate.last_entrypoint)
 
 func _on_area_2d_delete_body_entered(body: Node2D) -> void:
 	# reset slot on disk

@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://c40fli7qcma78"]
+
+[ext_resource type="Script" path="res://main/menu/slot/slot.gd" id="1_3dgi0"]
+[ext_resource type="Script" path="res://core/polygon/polygon.gd" id="3_3d6ht"]
+
+[node name="Slot" type="Node2D"]
+script = ExtResource("1_3dgi0")
+
+[node name="Platform" type="StaticBody2D" parent="."]
+
+[node name="P" type="CollisionPolygon2D" parent="Platform"]
+polygon = PackedVector2Array(40, 16, -152, 16, -152, 48, -176, 48, -176, 16, -192, 16, -192, 56, 80, 56, 80, 16, 64, 16, 64, 48, 40, 48)
+script = ExtResource("3_3d6ht")
+
+[node name="Area2D_Load" type="Area2D" parent="."]
+collision_layer = 255
+collision_mask = 255
+
+[node name="P" type="CollisionPolygon2D" parent="Area2D_Load"]
+polygon = PackedVector2Array(40, 48, 64, 48, 64, 24, 40, 24)
+script = ExtResource("3_3d6ht")
+color = Color(0.301961, 1, 0, 1)
+
+[node name="Area2D_Delete" type="Area2D" parent="."]
+
+[node name="P" type="CollisionPolygon2D" parent="Area2D_Delete"]
+polygon = PackedVector2Array(-176, 48, -152, 48, -152, 24, -176, 24)
+script = ExtResource("3_3d6ht")
+color = Color(1, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." groups=["text_viewport"]]
+offset_left = -192.0
+offset_top = -32.0
+offset_right = 80.0
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Area2D_Load" to="." method="_on_area_2d_load_body_entered"]
+[connection signal="body_entered" from="Area2D_Delete" to="." method="_on_area_2d_delete_body_entered"]

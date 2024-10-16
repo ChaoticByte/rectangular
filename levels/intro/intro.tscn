@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6w7lrydi43ts"]
+
+[ext_resource type="Script" path="res://levels/intro/intro.gd" id="1_pgj82"]
+[ext_resource type="Script" path="res://reusable/conveyor/conveyor.gd" id="3_0til7"]
+[ext_resource type="Script" path="res://core/polygon/polygon.gd" id="3_3lt07"]
+[ext_resource type="Script" path="res://reusable/spawner.gd" id="4_xsg5s"]
+[ext_resource type="PackedScene" uid="uid://cylmgbhvpdexh" path="res://reusable/aged_box/aged_box.tscn" id="5_hjicl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkj57"]
+size = Vector2(2288, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hgjk"]
+size = Vector2(14224, 656)
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_pgj82")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="P" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1216, 64, 32, 64, 32, 88, 0, 88, 0, 416, -448, 416, -448, 488, -32, 488, -32, 512, -64, 512, -64, 1664, 2240, 1664, 2240, 2624, -1856, 2624, -1856, 64)
+script = ExtResource("3_3lt07")
+
+[node name="Conveyor" type="Node2D" parent="."]
+position = Vector2(-1472, 66)
+script = ExtResource("3_0til7")
+conveyor_segments = 188
+speed_mult = 50.0
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2(-1440, 32)
+script = ExtResource("4_xsg5s")
+spawn_interval_secs = 7.0
+spawn_interval_rand = 0.5
+scene = ExtResource("5_hjicl")
+
+[node name="Conveyor2" type="Node2D" parent="."]
+position = Vector2(-448, 490)
+script = ExtResource("3_0til7")
+conveyor_segments = 52
+speed_mult = 50.0
+
+[node name="Spawner2" type="Node2D" parent="."]
+position = Vector2(-413, 448)
+script = ExtResource("4_xsg5s")
+spawn_interval_secs = 10.0
+spawn_interval_rand = 0.5
+scene = ExtResource("5_hjicl")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-1440, 56)
+
+[node name="P" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1216, -576, -1216, 320, -1856, 320, -1856, -576)
+script = ExtResource("3_3lt07")
+
+[node name="Spawner_pile" type="Node2D" parent="."]
+position = Vector2(160, 928)
+script = ExtResource("4_xsg5s")
+spawn_interval_secs = 0.02
+stop_after_secs = 5.0
+amount_per_interval = 4
+jitter_spawnpoint = true
+scene = ExtResource("5_hjicl")
+
+[node name="UnlockPlayer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockPlayer"]
+position = Vector2(1080, 688)
+shape = SubResource("RectangleShape2D_fkj57")
+
+[node name="DeleteBodies" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeleteBodies"]
+position = Vector2(3232, 3032)
+shape = SubResource("RectangleShape2D_0hgjk")
+
+[node name="P2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-352, 384, -352, 512, -512, 512, -512, 384)
+script = ExtResource("3_3lt07")
+
+[connection signal="body_entered" from="UnlockPlayer" to="." method="_on_unlock_player_body_entered"]
+[connection signal="body_entered" from="DeleteBodies" to="." method="_on_delete_bodies_body_entered"]

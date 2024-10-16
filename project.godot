@@ -18,9 +18,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Levels="*res://core/globals/levels.gd"
+LevelsCore="*res://core/globals/levels_core.gd"
 NodeRegistry="*res://core/globals/node_registry.gd"
 Gamestate="*res://core/globals/gamestate.gd"
+LevelsDef="*res://levels/levels_def.gd"
 
 [debug]
 

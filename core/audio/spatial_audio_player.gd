@@ -4,7 +4,7 @@ extends AudioStreamPlayer2D
 # EXPORTED VARS
 
 # detect every nth tick
-@export var detect_mod: int = 4
+@export var audio_tick_interval: int = 4
 
 @export_category("dampening effect")
 @export var n_pointcasts_to_player: int = 25
@@ -162,12 +162,12 @@ func _ready() -> void:
 	create_audio_bus_effects()
 	create_raycasts()
 
-var tick: int = 0
+var audio_tick: int = 0
 
-func _physics_process(delta: float) -> void:
-	if tick == 0:
+func _physics_process(_delta: float) -> void:
+	if audio_tick == 0:
 		var reverb_params = determine_reverb_params()
 		var blocked_amount = determine_distance_amount_blocked()
 		update_reverb(reverb_params[0], reverb_params[1])
 		update_dampening(blocked_amount)
-	tick = (tick + 1) % detect_mod
+	audio_tick = (audio_tick + 1) % audio_tick_interval
